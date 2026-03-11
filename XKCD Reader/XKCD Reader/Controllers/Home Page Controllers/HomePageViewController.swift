@@ -55,9 +55,9 @@ class HomePageViewController: UIViewController {
             if status == .authorized {
                 if let enrichedData = currentComic.imageDataWithMetadata() {
                     // Write to a temporary file so metadata is preserved through the share sheet
-                    let ext = currentComic.img.hasSuffix(".png") ? "png" : "jpg"
+                    let filename = URL(string: currentComic.img)?.lastPathComponent ?? "xkcd_\(currentComic.num).png"
                     let tempURL = FileManager.default.temporaryDirectory
-                        .appendingPathComponent("xkcd_\(currentComic.num).\(ext)")
+                        .appendingPathComponent(filename)
                     if (try? enrichedData.write(to: tempURL)) != nil {
                         items.append(tempURL)
                     }
