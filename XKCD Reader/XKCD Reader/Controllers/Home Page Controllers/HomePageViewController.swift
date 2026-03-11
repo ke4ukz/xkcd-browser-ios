@@ -48,14 +48,22 @@ class HomePageViewController: UIViewController {
         guard let currentComic = self.currentComic else {
             return
         }
-      
+
         PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
             guard let comicSite = NSURL(string: "https://xkcd.com/\(currentComic.num)") else { return }
             var items: [Any] = [comicSite]
             if status == .authorized {
-                guard let imgData = currentComic.imgData else { return }
-                guard let comicImage = UIImage(data: imgData) else { return }
-                items.append(comicImage)
+                if let enrichedData = currentComic.imageDataWithMetadata() {
+                    // Write to a temporary file so metadata is preserved through the share sheet
+                    let ext = currentComic.img.hasSuffix(".png") ? "png" : "jpg"
+                    let tempURL = FileManager.default.temporaryDirectory
+                        .appendingPathComponent("xkcd_\(currentComic.num).\(ext)")
+                    if (try? enrichedData.write(to: tempURL)) != nil {
+                        items.append(tempURL)
+                    }
+                } else if let imgData = currentComic.imgData, let comicImage = UIImage(data: imgData) {
+                    items.append(comicImage)
+                }
             }
             DispatchQueue.main.async {
                 let activityVC = UIActivityViewController(activityItems: items,
@@ -64,7 +72,7 @@ class HomePageViewController: UIViewController {
                 self.present(activityVC, animated: true, completion: nil)
             }
         }
-        
+
     }
     
     override func viewDidLoad() {

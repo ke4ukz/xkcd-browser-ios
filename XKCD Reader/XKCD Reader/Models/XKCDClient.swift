@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import ImageIO
+import MobileCoreServices
 
 enum XKCDError: Error {
     case badURL
@@ -77,6 +79,50 @@ class XKCDComic: NSObject, NSSecureCoding, Codable {
     let alt: String
     let img: String
     var imgData: Data?
+}
+
+extension XKCDComic {
+    /// Returns image data with EXIF/IPTC/TIFF metadata embedded from the comic's properties.
+    func imageDataWithMetadata() -> Data? {
+        guard let imgData = imgData else { return nil }
+        guard let source = CGImageSourceCreateWithData(imgData as CFData, nil) else { return nil }
+        guard let uti = CGImageSourceGetType(source) else { return nil }
+
+        let output = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(output, uti, 1, nil) else { return nil }
+
+        // Format date as EXIF expects: "YYYY:MM:DD HH:MM:SS"
+        let paddedMonth = month.count == 1 ? "0\(month)" : month
+        let paddedDay = day.count == 1 ? "0\(day)" : day
+        let exifDate = "\(year):\(paddedMonth):\(paddedDay) 12:00:00"
+
+        let tiffProperties: [String: Any] = [
+            kCGImagePropertyTIFFDocumentName as String: title,
+            kCGImagePropertyTIFFArtist as String: "Randall Munroe",
+            kCGImagePropertyTIFFImageDescription as String: alt,
+        ]
+
+        let exifProperties: [String: Any] = [
+            kCGImagePropertyExifDateTimeOriginal as String: exifDate,
+            kCGImagePropertyExifUserComment as String: "https://xkcd.com/\(num)",
+        ]
+
+        let iptcProperties: [String: Any] = [
+            kCGImagePropertyIPTCObjectName as String: title,
+            kCGImagePropertyIPTCCaptionAbstract as String: alt,
+        ]
+
+        let metadata: [String: Any] = [
+            kCGImagePropertyTIFFDictionary as String: tiffProperties,
+            kCGImagePropertyExifDictionary as String: exifProperties,
+            kCGImagePropertyIPTCDictionary as String: iptcProperties,
+        ]
+
+        CGImageDestinationAddImageFromSource(destination, source, 0, metadata as CFDictionary)
+
+        guard CGImageDestinationFinalize(destination) else { return nil }
+        return output as Data
+    }
 }
 
 extension XKCDComic: Comparable {
