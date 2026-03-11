@@ -33,6 +33,7 @@
 		0A6A25FA27E01B7200CC359A /* XKCDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A25F927E01B7200CC359A /* XKCDButton.swift */; };
 		0A6A25FC27E0204300CC359A /* ClearFavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A25FB27E0204300CC359A /* ClearFavoritesTableViewCell.swift */; };
 		0A6A25FE27E0225500CC359A /* CacheToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A25FD27E0225500CC359A /* CacheToggleTableViewCell.swift */; };
+		AA00000127E1000000000001 /* VersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000027E1000000000001 /* VersionTableViewCell.swift */; };
 		0A6A260027E046D000CC359A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A25FF27E046D000CC359A /* Settings.bundle */; };
 		0A6A260427E0846E00CC359A /* RateThisAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6A260327E0846E00CC359A /* RateThisAppView.swift */; };
 		0A9F8ACD27DBFF540065A512 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9F8ACC27DBFF540065A512 /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		0A6A25F927E01B7200CC359A /* XKCDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDButton.swift; sourceTree = "<group>"; };
 		0A6A25FB27E0204300CC359A /* ClearFavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearFavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		0A6A25FD27E0225500CC359A /* CacheToggleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheToggleTableViewCell.swift; sourceTree = "<group>"; };
+		AA00000027E1000000000001 /* VersionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTableViewCell.swift; sourceTree = "<group>"; };
 		0A6A25FF27E046D000CC359A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0A6A260327E0846E00CC359A /* RateThisAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateThisAppView.swift; sourceTree = "<group>"; };
 		0A9F8AC927DBFF540065A512 /* XKCD Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XKCD Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 				0A6A25F327DFF0D300CC359A /* ClearCacheTableViewCell.swift */,
 				0A6A25FB27E0204300CC359A /* ClearFavoritesTableViewCell.swift */,
 				0A6A25FD27E0225500CC359A /* CacheToggleTableViewCell.swift */,
+				AA00000027E1000000000001 /* VersionTableViewCell.swift */,
 			);
 			path = "Settings Views";
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				0A4BBFF327DD54EA001C9BB7 /* ComicsDataManager.swift in Sources */,
 				0A6A25ED27DFE7DC00CC359A /* SearchSettingTableViewCell.swift in Sources */,
 				0A4878B527DC4DB000E9DB81 /* ComicInfoView.swift in Sources */,
+				AA00000127E1000000000001 /* VersionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.defcoding.XKCD-Reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -525,7 +529,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.defcoding.XKCD-Reader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

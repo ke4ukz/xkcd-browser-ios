@@ -46,12 +46,13 @@ class SettingsViewController: UIViewController {
         settingsTable.register(ClearCacheTableViewCell.self, forCellReuseIdentifier: "ClearCacheCell")
         settingsTable.register(ClearFavoritesTableViewCell.self, forCellReuseIdentifier: "ClearFavoritesCell")
         settingsTable.register(CacheToggleTableViewCell.self, forCellReuseIdentifier: "CacheToggleCell")
+        settingsTable.register(VersionTableViewCell.self, forCellReuseIdentifier: "VersionCell")
     }
 }
 
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +61,8 @@ extension SettingsViewController: UITableViewDataSource {
             return 2
         case 1:
             return 3
+        case 2:
+            return 1
         default:
             return 0
         }
@@ -88,6 +91,13 @@ extension SettingsViewController: UITableViewDataSource {
             default:
                 break
             }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                cell = tableView.dequeueReusableCell(withIdentifier: "VersionCell", for: indexPath)
+            default:
+                break
+            }
         default:
             break
         }
@@ -110,6 +120,8 @@ extension SettingsViewController: UITableViewDelegate {
             sectionLabel.text = "App Settings"
         case 1:
             sectionLabel.text = "App Data"
+        case 2:
+            sectionLabel.text = "About"
         default:
             return nil
         }
